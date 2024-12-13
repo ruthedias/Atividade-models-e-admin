@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <h1 style="margin-bottom: 0px;">{{produto.nome}} por {{produto.preco}}</h1>
+        <p>Fornecimento: {{produto.fornecedor}}, Código de barras: {{produto.codigo}}</p>
+        <p>Descrição: {{produto.descricao}}</p>
+    </main>
+</body>
+</html>

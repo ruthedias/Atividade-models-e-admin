@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <h1>Produtos, Categorias e Fornecedores</h1>
+<table style="border-collapse: collapse; width: 100%;">
+    <thead>
+        <tr>
+            <th>Produto</th>
+            <th>Categoria</th>
+            <th>Fornecedor</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for produto in produtos %}
+            <tr>
+                <td><a href="detalhes/{{produto.id}}">{{ produto.nome }}</a></td>
+                <td>
+                    {% for categoria in produto.categories.all %}
+                        {{ categoria.nome }}
+                    {% endfor %}</td>
+                <td>{{ produto.fornecedor.nome }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+    </main>
+</body>
+</html>
