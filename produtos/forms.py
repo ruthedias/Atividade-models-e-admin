@@ -1,7 +1,7 @@
 from django import forms
 from .models import Categoria, Fornecedor
 
-class ProductForm(forms.Form):
+class FormularioProduto(forms.Form):
     nome = forms.CharField(label="Nome")
     codigo = forms.CharField(label="Código")
     descricao = forms.CharField(label="Descrição", widget=forms.Textarea)
@@ -11,12 +11,13 @@ class ProductForm(forms.Form):
     categories = forms.ModelMultipleChoiceField(queryset=Categoria.objects.all(), widget=forms.CheckboxSelectMultiple, label="Categorias")
     fornecedor = forms.ModelChoiceField(queryset=Fornecedor.objects.all(), label="Fornecedor")
 
-
-class SupplierForm(forms.Form):
+class FormularioFornecedor(forms.Form):
     nome = forms.CharField(label="Nome")
     cnpj = forms.CharField(label="CNPJ")
     cep = forms.CharField(label="Cep")
     rua = forms.CharField(label="Endereço")
 
-class CategoryForm(forms.Form):
+class FormularioCategoria(forms.Form):
     nome = forms.CharField(label="Categoria")
+
+

@@ -20,9 +20,9 @@ from produtos import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('index', views.produto, name="index"),
+    path('', views.produto, name="index"),
     path('detalhes/<id>', views.detalhes, name="detalhes"),
-    path('formProduto', views.createProduto, name="create_pull"),
-    path('formFornecedor', views.CreateSupplier, name="create_supplier"),
-    path('formCategory', views.CreateCategory, name="create_category")    
+    path('formProduto', views.CriarProduto, name="criarProduto"),
+    path('formFornecedor', views.CriarFornecedpor, name="criarFornecedor"),
+    path('formCategoria', views.CriarCategoria, name="criarCategoria")    
 ]

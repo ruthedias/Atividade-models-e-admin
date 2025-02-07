@@ -9,7 +9,7 @@
 </head>
 <body>
     <main>
-        <form action="{% url "create_pull" %}" method="POST">
+        <form action="{% url "criarProduto" %}" method="POST">
             {% csrf_token %}
             {{form}}
             <button type="submit" >Criar</button>

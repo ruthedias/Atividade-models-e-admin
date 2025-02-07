@@ -2,8 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from .models import Produto, Fornecedor, Categoria
-from .forms import ProductForm, SupplierForm, CategoryForm
-from datetime import datetime
+from .forms import FormularioProduto, FormularioFornecedor, FormularioCategoria
 
 # Create your views here.
 
@@ -18,11 +17,10 @@ def detalhes(request, id):
     produto = Produto.objects.get(id=id)
     return render(request, 'detalhes.html', {'produto': produto})
 
-
-def createProduto(request):
-    form = ProductForm()
+def CriarProduto(request):
+    form = FormularioProduto()
     if request.method == "POST":
-        form = ProductForm(request.POST)#recebe os dados enviados
+        form = FormularioProduto(request.POST)#recebe os dados enviados
         if form.is_valid():
             produto = Produto(
                 nome=form.cleaned_data['nome'],
@@ -34,42 +32,42 @@ def createProduto(request):
                 fornecedor=form.cleaned_data['fornecedor'],
             )
             produto.save()
-            produto.categories.set(form.cleaned_data['categories'])
+            produto.categoria.set(form.cleaned_data['categories'])
             return HttpResponseRedirect(reverse('index'))
         else:
-            form = ProductForm(request.POST)
+            form = FormularioProduto(request.POST)
 
-    return render(request, 'createProduto.html', {'form': form})
+    return render(request, 'criarProduto.html', {'form': form})
 
-def CreateSupplier(request):
-    formSupplier = SupplierForm()
+def CriarFornecedpor(request):
+    formularioFornecedor = FormularioFornecedor()
     if request.method == "POST":
-        formSupplier = SupplierForm(request.POST)
-    if formSupplier.is_valid():
+        formularioFornecedor = FormularioFornecedor(request.POST)
+    if formularioFornecedor.is_valid():
         supplier = Fornecedor(
-            nome = formSupplier.cleaned_data['nome'],
-            cnpj = formSupplier.cleaned_data['cnpj'],
-            cep = formSupplier.cleaned_data['cep'],
-            rua = formSupplier.cleaned_data['rua'],
+            nome = formularioFornecedor.cleaned_data['nome'],
+            cnpj = formularioFornecedor.cleaned_data['cnpj'],
+            cep = formularioFornecedor.cleaned_data['cep'],
+            rua = formularioFornecedor.cleaned_data['rua'],
         )
         supplier.save()
         return HttpResponseRedirect(reverse('index'))
     else: 
-        formSupplier = SupplierForm(request.POST)
-        formSupplier.errors.clear()
+        formularioFornecedor = FormularioFornecedor(request.POST)
+        formularioFornecedor.errors.clear()
 
-    return render(request, 'createSupplier.html', {'formSupplier': formSupplier})
+    return render(request, 'criarFornecedor.html', {'formularioFornecedor': formularioFornecedor})
 
-def CreateCategory(request):
+def CriarCategoria(request):
     if request.method == "POST":
-        formCategory = CategoryForm(request.POST)
-        if formCategory.is_valid():
+        formularioCategoria = FormularioCategoria(request.POST)
+        if formularioCategoria.is_valid():
             category = Categoria(
-                nome = formCategory.cleaned_data['nome'],
+                nome = formularioCategoria.cleaned_data['nome'],
             )
             category.save()
             return HttpResponseRedirect(reverse('index'))
     else:
-        formCategory = CategoryForm()
+        formularioCategoria = FormularioCategoria()
         
-    return render(request, 'createCategory.html', {'formCategory': formCategory})
+    return render(request, 'criarCategoria.html', {'formularioCategoria': formularioCategoria})

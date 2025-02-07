@@ -9,9 +9,9 @@
 </head>
 <body>
     <main>
-        <form action="{% url "create_supplier" %}" method="POST">
+        <form action="{% url "criarFornecedor" %}" method="POST">
             {% csrf_token %}
-            {{formSupplier}}
+            {{formularioFornecedor}}
             <button type="submit" >Criar</button>
         </form>
     </main>
